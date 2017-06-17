@@ -16,7 +16,7 @@ async function fetchUser(req, res, next) {
         status: 404,
       });
     }
-    return res.json(user.clean());
+    return res.json(user);
   } catch (err) {
     return next(err);
   }

@@ -33,7 +33,7 @@ async function createUser(req, res, next) {
       lastName,
       passwordHash,
     }).save();
-    return res.json(user.clean());
+    return res.json(user);
   } catch (err) {
     return next(err);
   }
