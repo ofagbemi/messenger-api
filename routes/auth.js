@@ -38,7 +38,7 @@ async function authUser(req, res, next) {
 }
 
 async function generateAuthToken(user) {
-  return await signAsync({ id: user.get('id') }, process.env.JWT_SECRET, {
+  return signAsync({ id: user.get('id') }, process.env.JWT_SECRET, {
     expiresIn: DAY_SECONDS,
   });
 }
