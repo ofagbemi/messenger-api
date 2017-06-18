@@ -2,16 +2,17 @@ const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const router = require('express').Router();
 
-const User = require('../../models/user');
+const User = require('../models/user');
+const generateAuthResponse = require('./auth/generateAuthResponse');
 
 const hashAsync = promisify(bcrypt.hash);
 
 const SALT_ROUNDS = 10;
 
-module.exports = router.post('/', createUser);
+module.exports = router.post('/', registerUser);
 
 
-async function createUser(req, res, next) {
+async function registerUser(req, res, next) {
   const {
     username,
     firstName,
@@ -33,7 +34,7 @@ async function createUser(req, res, next) {
       lastName,
       passwordHash,
     }).save();
-    return res.json(user);
+    return res.json(await generateAuthResponse(user));
   } catch (err) {
     return next(err);
   }
