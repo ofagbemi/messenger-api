@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "migrate": "node_modules/.bin/knex migrate:latest",
+    "rollback": "node_modules/.bin/knex migrate:rollback"
+  },
   "dependencies": {
     "bcryptjs": "2.4.3",
     "body-parser": "1.17.2",

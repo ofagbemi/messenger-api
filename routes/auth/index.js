@@ -21,7 +21,7 @@ async function authUser(req, res, next) {
         message: `User '${user}' could not be found`,
       });
     }
-    if (await compareAsync(password, user.get('passwordHash'))) {
+    if (await compareAsync(password, user.get('password_hash'))) {
       return res.json(await generateAuthResponse(user));
     }
     return res.json({

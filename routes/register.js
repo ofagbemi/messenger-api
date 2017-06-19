@@ -15,8 +15,8 @@ module.exports = router.post('/', registerUser);
 async function registerUser(req, res, next) {
   const {
     username,
-    firstName,
-    lastName,
+    first_name,
+    last_name,
     password,
   } = req.body;
 
@@ -30,9 +30,9 @@ async function registerUser(req, res, next) {
   try {
     const user = await new User({
       username,
-      firstName,
-      lastName,
-      passwordHash,
+      first_name,
+      last_name,
+      password_hash: passwordHash,
     }).save();
     return res.json(await generateAuthResponse(user));
   } catch (err) {

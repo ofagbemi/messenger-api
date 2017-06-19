@@ -6,6 +6,7 @@ require('./message');
 module.exports = bookshelf.model('User', {
   tableName: 'users',
   uuid: true,
+  hasTimestamps: true,
 
   threads() {
     return this.belongsToMany('Thread');
@@ -16,8 +17,8 @@ module.exports = bookshelf.model('User', {
   },
 
   hidden: [
-    'passwordHash',
-    '_pivot_threadId',
-    '_pivot_memberId',
+    'password_hash',
+    '_pivot_thread_id',
+    '_pivot_member_id',
   ],
 });

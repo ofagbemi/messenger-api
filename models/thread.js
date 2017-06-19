@@ -6,9 +6,10 @@ require('./message');
 module.exports = bookshelf.model('Thread', {
   tableName: 'threads',
   uuid: true,
+  hasTimestamps: true,
 
   members() {
-    return this.belongsToMany('User', 'threads_members', 'threadId', 'memberId');
+    return this.belongsToMany('User', 'threads_members', 'thread_id', 'member_id');
   },
 
   messages() {
