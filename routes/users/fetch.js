@@ -3,7 +3,10 @@ const router = require('express').Router();
 const User = require('../../models/user');
 const authMiddleware = require('../../middleware/auth');
 
-module.exports = router.get('/:id', authMiddleware, fetchUser);
+module.exports = router
+  .use(authMiddleware)
+  .get('/', fetchUsers)
+  .get('/:id', fetchUser);
 
 
 async function fetchUser(req, res, next) {
@@ -17,6 +20,18 @@ async function fetchUser(req, res, next) {
       });
     }
     return res.json(user);
+  } catch (err) {
+    return next(err);
+  }
+}
+
+async function fetchUsers(req, res, next) {
+  const { ids } = req.query;
+  try {
+    const users = await new User()
+      .query(qb => qb.where('id', 'in', ids))
+      .fetchAll();
+    return res.json({ results: users });
   } catch (err) {
     return next(err);
   }
