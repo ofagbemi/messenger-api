@@ -9,6 +9,7 @@ const EXPIRES_IN = DAY_SECONDS;
 
 module.exports = async function generateAuthResponse(user) {
   return {
+    id: user.id,
     access_token: await generateAuthToken(user),
     expires_in: EXPIRES_IN,
   };
