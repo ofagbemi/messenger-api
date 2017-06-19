@@ -14,6 +14,7 @@ async function fetchMessages(req, res, next) {
   try {
     const messages = await new Message()
       .query(qb => qb.where({ thread_id }))
+      .orderBy('created_at', 'DESC')
       .fetchAll();
     return res.json({ results: messages });
   } catch (err) {
